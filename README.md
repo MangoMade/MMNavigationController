@@ -24,7 +24,8 @@
 **并且支持全屏Pop手势**
 
 效果图：
-「」
+
+![2016-11-12 16_52_24.gif](http://upload-images.jianshu.io/upload_images/1748971-2d8a75c1236529e1.gif?imageMogr2/auto-orient/strip)
 
 
 ##使用

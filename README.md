@@ -1,4 +1,4 @@
-##解决的问题
+## 解决的问题
 
 由于`NavigationBar`的生命周期是与`UINavigationController`绑定的，所以`UINavigationController`的所有子`ViewController`都共用同一个`NavigationBar`,但是在实际开发的需求中，常常会有某个视图的导航栏颜色与其它视图的导航栏颜色不同。
 
@@ -28,7 +28,7 @@
 ![2016-11-12 16_52_24.gif](http://upload-images.jianshu.io/upload_images/1748971-2d8a75c1236529e1.gif?imageMogr2/auto-orient/strip)
 
 
-##使用
+## 使用
 
 **由于`Swift`不能重写`load`方法，所以需要在AppDelegate中调用`UIViewController.mm_load()`  
 然后用`MMNavigationController`代替`UINavigationController`**
@@ -77,12 +77,12 @@
     
 简单易用！
 
-##实现
+## 实现
 
 主要实现是参考了[FDFullscreenPopGesture](https://github.com/forkingdog/FDFullscreenPopGesture)
 
 运用AOP, 在`viewWillAppear`中进行属性的设置。
 
-##Cocoapods
+## Cocoapods
 
 	pod 'MMNavigationController'

@@ -1,14 +1,13 @@
-
-
 import UIKit
+
 
 extension UIViewController {
     
-    private struct OnceToken {
-        static var viewWillAppearMethodsSwizzled = dispatch_once_t()
+    fileprivate struct OnceToken {
+        static var viewWillAppearMethodsSwizzled = Int()
     }
     
-    private struct AssociatedKey {
+    fileprivate struct AssociatedKey {
         static var viewWillAppearInjectBlock = 0
         static var navigationBarHidden = 0
         static var popGestrueEnable = 0
@@ -17,13 +16,15 @@ extension UIViewController {
         static var navigationBarTitleColor = 0
     }
     
+    private static let methodsSwizzling: () = {
+        let originalViewWillAppearSelector = class_getInstanceMethod(UIViewController.self, #selector(viewWillAppear(_:)))
+        let swizzledViewWillAppearSelector = class_getInstanceMethod(UIViewController.self, #selector(mm_viewWillAppear(_:)))
+        method_exchangeImplementations(originalViewWillAppearSelector, swizzledViewWillAppearSelector)
+    }()
+    
     /// 在AppDelegate中调用此方法
     class func mm_load() {
-        dispatch_once(&OnceToken.viewWillAppearMethodsSwizzled) {
-            let originalViewWillAppearSelector = class_getInstanceMethod(self, #selector(viewWillAppear(_:)))
-            let swizzledViewWillAppearSelector = class_getInstanceMethod(self, #selector(mm_viewWillAppear(_:)))
-            method_exchangeImplementations(originalViewWillAppearSelector, swizzledViewWillAppearSelector)
-        }
+        methodsSwizzling
     }
     
     /// navigationBar 是否隐藏
@@ -92,12 +93,12 @@ extension UIViewController {
     }
     
     // MARK - private methods
-    @objc private func mm_viewWillAppear(animated: Bool) {
+    @objc fileprivate func mm_viewWillAppear(_ animated: Bool) {
         mm_viewWillAppear(animated)
-        mm_viewWillAppearInjectBlock?.block?(viewController: self, animated: animated)
+        mm_viewWillAppearInjectBlock?.block?(self, animated)
     }
     
-    @objc private var mm_viewWillAppearInjectBlock: ViewControllerInjectBlockWrapper? {
+    @objc fileprivate var mm_viewWillAppearInjectBlock: ViewControllerInjectBlockWrapper? {
         get {
             return objc_getAssociatedObject(self, &AssociatedKey.viewWillAppearInjectBlock) as? ViewControllerInjectBlockWrapper
         }
@@ -114,19 +115,19 @@ class MMNavigationController: UINavigationController {
     // MARK: - properties
     
     /// navgation bar 默认背景颜色
-    var defaultNavigationBarBackgroundColor = UIColor.whiteColor()
+    var defaultNavigationBarBackgroundColor = UIColor.white
     
     /// navgation bar 默认标题颜色
-    var defaultTitleColor = UIColor.blackColor()
+    var defaultTitleColor = UIColor.black
     
     /// full screen 手势
     lazy var fullscreenInteractivePopGestureRecognizer = UIPanGestureRecognizer()
     
     /// navigation bar 主体视图，此属性用于兼容 iOS 10
-    private var barBackgoundView: UIView? {
+    fileprivate var barBackgoundView: UIView? {
         if #available(iOS 10.0, *) {
             for view in navigationBar.subviews {
-                if NSClassFromString("_UIBarBackground").flatMap(view.isKindOfClass) == true {
+                if NSClassFromString("_UIBarBackground").flatMap(view.isKind(of:)) == true {
                     return view
                 }
             }
@@ -134,7 +135,7 @@ class MMNavigationController: UINavigationController {
         return nil
     }
     
-    private lazy var popGestrueDelegate: MMNavigationControllerPopGestrueDelegate = {
+    fileprivate lazy var popGestrueDelegate: MMNavigationControllerPopGestrueDelegate = {
         let delegate = MMNavigationControllerPopGestrueDelegate()
         delegate.navigationController = self
         return delegate
@@ -148,17 +149,17 @@ class MMNavigationController: UINavigationController {
         /// 导航栏设置为不透明， UIViewController的view会自动向下偏移 64
         /// viewController.extendedLayoutIncludesOpaqueBars = true
         /// 以上设置可以解决这个问题
-        navigationBar.translucent = false
+        navigationBar.isTranslucent = false
     }
 
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setBarBackgroundColor(defaultNavigationBarBackgroundColor, animated: false)
     }
     
     
-    override func pushViewController(viewController: UIViewController, animated: Bool) {
+    override func pushViewController(_ viewController: UIViewController, animated: Bool) {
 
         let blockWrapper = ViewControllerInjectBlockWrapper { (viewController: UIViewController, animated: Bool) -> Void in
 
@@ -185,22 +186,22 @@ class MMNavigationController: UINavigationController {
     
     // MARK: - private methods
     
-    private func initFullscreenGesture() {
+    fileprivate func initFullscreenGesture() {
         
         fullscreenInteractivePopGestureRecognizer.delegate = popGestrueDelegate
-        guard let targets = interactivePopGestureRecognizer?.valueForKey("targets") as? [AnyObject] else { return }
-        guard let target = (targets.first as? NSObject)?.valueForKey("target") else { return }
+        guard let targets = interactivePopGestureRecognizer?.value(forKey: "targets") as? [AnyObject] else { return }
+        guard let target = (targets.first as? NSObject)?.value(forKey: "target") else { return }
         let internalAction = NSSelectorFromString("handleNavigationTransition:")
         fullscreenInteractivePopGestureRecognizer.maximumNumberOfTouches = 1
         fullscreenInteractivePopGestureRecognizer.addTarget(target, action: internalAction)
-        interactivePopGestureRecognizer?.enabled = false
+        interactivePopGestureRecognizer?.isEnabled = false
         interactivePopGestureRecognizer?.view?.addGestureRecognizer(fullscreenInteractivePopGestureRecognizer)
     }
     
     // MARK: - public methods
     
     /// 设置 title 的字体颜色
-    func setTitleColor(textColor: UIColor){
+    func setTitleColor(_ textColor: UIColor){
         if navigationBar.titleTextAttributes == nil{
             navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : textColor]
         }else{
@@ -211,23 +212,23 @@ class MMNavigationController: UINavigationController {
     /// 隐藏 navigation bar 底部灰线
     func hideBottomLine() {
         navigationBar.shadowImage = UIImage()
-        navigationBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
+        navigationBar.setBackgroundImage(UIImage(), for: .default)
     }
     
     /// 设置返回按钮图片
-    func setBackButtonImage(image: UIImage){
-        let backButtonImage = image.imageWithRenderingMode(.AlwaysOriginal)
+    func setBackButtonImage(_ image: UIImage){
+        let backButtonImage = image.withRenderingMode(.alwaysOriginal)
         navigationBar.backIndicatorImage = backButtonImage
         navigationBar.backIndicatorTransitionMaskImage = backButtonImage
     }
     
     /// 设置 navigation bar 背景颜色
-    func setBarBackgroundColor(color: UIColor, animated: Bool) {
+    func setBarBackgroundColor(_ color: UIColor, animated: Bool) {
         let duration = animated ? 0.25 : 0.0
-        UIView.animateWithDuration(duration) {
+        UIView.animate(withDuration: duration, animations: {
             self.navigationBar.barTintColor = color
             self.barBackgoundView?.backgroundColor = color
-        }
+        }) 
     }
 }
 
@@ -244,29 +245,34 @@ extension MMNavigationControllerPopGestrueDelegate: UIGestureRecognizerDelegate 
     
     
     /// 这里主要参考了 FDFullscreenPopGesture
-    @objc private func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
+    @objc fileprivate func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         
-        if navigationController?.viewControllers.count <= 1 {
+        guard let navigationController = navigationController,
+              let gestureRecognizer = gestureRecognizer as? UIPanGestureRecognizer else {
             return false
         }
         
-        let topViewController = navigationController?.viewControllers.last
+        if navigationController.viewControllers.count <= 1 {
+            return false
+        }
+        
+        let topViewController = navigationController.viewControllers.last
         if topViewController?.mm_popGestrueEnable == false {
             return false
         }
 
-        let startLocation = gestureRecognizer.locationInView(gestureRecognizer.view)
-        let enableWidth = topViewController?.mm_popGestrueEnableWidth
+        let startLocation = gestureRecognizer.location(in: gestureRecognizer.view)
+        let enableWidth = topViewController?.mm_popGestrueEnableWidth ?? 0
         if enableWidth > 0 && startLocation.x > enableWidth {
             return false
         }
         
-        if navigationController?.valueForKey("_isTransitioning") as? Bool == true {
+        if navigationController.value(forKey: "_isTransitioning") as? Bool == true {
             return false
         }
         
-        let translation = (gestureRecognizer as? UIPanGestureRecognizer)?.translationInView(gestureRecognizer.view)
-        if translation?.x <= 0 {
+        let translation = gestureRecognizer.translation(in: gestureRecognizer.view)
+        if translation.x <= 0 {
             return false
         }
         
@@ -277,9 +283,9 @@ extension MMNavigationControllerPopGestrueDelegate: UIGestureRecognizerDelegate 
 
 @objc private class ViewControllerInjectBlockWrapper: NSObject {
     
-    var block: ((viewController: UIViewController, animated: Bool) -> Void)?
+    var block: ((_ viewController: UIViewController, _ animated: Bool) -> Void)?
     
-    init(block: ((viewController: UIViewController, animated: Bool) -> Void)?) {
+    init(block: ((_ viewController: UIViewController, _ animated: Bool) -> Void)?) {
         self.block = block
         super.init()
     }

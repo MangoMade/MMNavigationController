@@ -12,11 +12,11 @@ import UIKit
 struct Screen {
     
     static var bounds: CGRect {
-        return UIScreen.mainScreen().bounds
+        return UIScreen.main.bounds
     }
     
     static var center: CGPoint {
-        return CGPointMake(width / 2, height / 2)
+        return CGPoint(x: width / 2, y: height / 2)
     }
     
     static var size: CGSize {
@@ -32,7 +32,7 @@ struct Screen {
     }
     
     static var scale: CGFloat {
-        return UIScreen.mainScreen().scale
+        return UIScreen.main.scale
     }
     
     static var onePX: CGFloat {
@@ -44,7 +44,7 @@ struct Screen {
     static let tabBarHeight: CGFloat = 49
 
     static var statusBarHeight: CGFloat {
-        return UIApplication.sharedApplication().statusBarFrame.height
+        return UIApplication.shared.statusBarFrame.height
     }
 
 }

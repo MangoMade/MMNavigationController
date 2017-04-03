@@ -83,6 +83,13 @@
 
 运用AOP, 在`viewWillAppear`中进行属性的设置。
 
+## Requirements
+
+* iOS 8.0
+* XCode 8.0
+* Swift 3.0
+* Swift 2.x请使用 0.0.1
+
 ## Cocoapods
 
-	pod 'MMNavigationController'
+	pod 'MMNavigationController', '~> 0.0.2’

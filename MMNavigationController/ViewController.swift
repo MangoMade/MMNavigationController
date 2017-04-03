@@ -11,21 +11,21 @@ import UIKit
 
 class BaseViewController: UIViewController {
     
-    let nextButton = UIButton(type: .System)
+    let nextButton = UIButton(type: .system)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.whiteColor()
+        view.backgroundColor = UIColor.white
         
         
         view.addSubview(nextButton)
-        nextButton.setTitle("To next page", forState: .Normal)
+        nextButton.setTitle("To next page", for: UIControlState())
         nextButton.sizeToFit()
         nextButton.center = Screen.center
-        nextButton.addTarget(self, action: #selector(reponseToNext(_:)), forControlEvents: .TouchUpInside)
+        nextButton.addTarget(self, action: #selector(reponseToNext(_:)), for: .touchUpInside)
     }
     
-    func reponseToNext(sender: UIButton) {
+    func reponseToNext(_ sender: UIButton) {
         
     }
     
@@ -38,7 +38,7 @@ class NormalViewController: BaseViewController {
         title = "Normal"
     }
     
-    override func reponseToNext(sender: UIButton) {
+    override func reponseToNext(_ sender: UIButton) {
         navigationController?.pushViewController(RandomColorViewController(), animated: true)
     }
 
@@ -48,24 +48,24 @@ class RandomColorViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.whiteColor()
+        view.backgroundColor = UIColor.white
         
         title = "Random Color"
         
         mm_navigationBarBackgroundColor = UIColor.randomColor()
         mm_popGestrueEnableWidth  = 150
-        mm_navigationBarTitleColor = UIColor.whiteColor()
+        mm_navigationBarTitleColor = UIColor.white
         
         let gestureEnableLabel = UILabel()
         gestureEnableLabel.numberOfLines = 0
-        gestureEnableLabel.textAlignment = .Center
+        gestureEnableLabel.textAlignment = .center
         gestureEnableLabel.text = "pop手势\n\n灰色区域内\n\n有效"
-        gestureEnableLabel.backgroundColor = UIColor.lightGrayColor().colorWithAlphaComponent(0.5)
+        gestureEnableLabel.backgroundColor = UIColor.lightGray.withAlphaComponent(0.5)
         gestureEnableLabel.frame = CGRect(x: 0, y: 0, width: mm_popGestrueEnableWidth, height: view.bounds.height)
         view.addSubview(gestureEnableLabel)
     }
     
-    override func reponseToNext(sender: UIButton) {
+    override func reponseToNext(_ sender: UIButton) {
         navigationController?.pushViewController(HiddenBarViewController(), animated: true)
     }
     
@@ -78,7 +78,7 @@ class HiddenBarViewController: BaseViewController {
         mm_navigationBarHidden = true
     }
     
-    override func reponseToNext(sender: UIButton) {
+    override func reponseToNext(_ sender: UIButton) {
         navigationController?.pushViewController(NormalViewController(), animated: true)
     }
     
@@ -99,9 +99,9 @@ extension UIColor {
 
 extension UIImage {
     
-    static func imageWithColor(color: UIColor) -> UIImage {
-        let size = CGSizeMake(1, 1)
-        let rect = CGRectMake(0, 0, size.width, size.height)
+    static func imageWithColor(_ color: UIColor) -> UIImage {
+        let size = CGSize(width: 1, height: 1)
+        let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
         UIGraphicsBeginImageContextWithOptions(size, false, 0)
         color.setFill()
         UIRectFill(rect)

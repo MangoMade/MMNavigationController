@@ -9,13 +9,15 @@
 Pod::Spec.new do |s|
 
 
-  s.name         = " MMNavigationController"
-  s.version      = "0.0.1"
+  s.name         = "MMNavigationController"
+  s.version      = "0.0.2"
   s.summary      = "A NavigationController with fullscreen pop gesture. You can change color of navigation bar in a sample way!"
 
   s.description  = <<-DESC
   一句代码，即可修改导航栏颜色。
   附加全屏pop手势。
+  A NavigationController with fullscreen pop gesture. 
+  You can change color of navigation bar in a sample way!
                    DESC
 
   s.homepage     = "https://github.com/MangoMade/MMNavigationController"

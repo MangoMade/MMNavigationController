@@ -92,4 +92,4 @@
 
 ## Cocoapods
 
-	pod 'MMNavigationController', '~> 0.0.2’
+	pod 'MMNavigationController', '~> 0.0.3’

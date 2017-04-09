@@ -13,6 +13,10 @@
 		DB32C4A71DD4668500B27E52 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB32C4A51DD4668500B27E52 /* LaunchScreen.storyboard */; };
 		DB32C4B11DD466DA00B27E52 /* MMNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB32C4AF1DD466DA00B27E52 /* MMNavigationController.swift */; };
 		DB32C4B41DD46A8900B27E52 /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB32C4B31DD46A8900B27E52 /* Screen.swift */; };
+		DB63BA9F1E967CBD00ED7C24 /* Namespace.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB63BA9E1E967CBD00ED7C24 /* Namespace.swift */; };
+		DBBECC0E1E9A6E8B006C2BD2 /* ViewControllerInjectBlockWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBECC0D1E9A6E8B006C2BD2 /* ViewControllerInjectBlockWrapper.swift */; };
+		DBBECC101E9A6F9F006C2BD2 /* PopGestrueDelegateObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBECC0F1E9A6F9F006C2BD2 /* PopGestrueDelegateObject.swift */; };
+		DBBECC121E9A6FE6006C2BD2 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBECC111E9A6FE6006C2BD2 /* UIViewControllerExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +28,10 @@
 		DB32C4A81DD4668500B27E52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DB32C4AF1DD466DA00B27E52 /* MMNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MMNavigationController.swift; sourceTree = "<group>"; };
 		DB32C4B31DD46A8900B27E52 /* Screen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Screen.swift; sourceTree = "<group>"; };
+		DB63BA9E1E967CBD00ED7C24 /* Namespace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Namespace.swift; sourceTree = "<group>"; };
+		DBBECC0D1E9A6E8B006C2BD2 /* ViewControllerInjectBlockWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerInjectBlockWrapper.swift; sourceTree = "<group>"; };
+		DBBECC0F1E9A6F9F006C2BD2 /* PopGestrueDelegateObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopGestrueDelegateObject.swift; sourceTree = "<group>"; };
+		DBBECC111E9A6FE6006C2BD2 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +79,10 @@
 			isa = PBXGroup;
 			children = (
 				DB32C4AF1DD466DA00B27E52 /* MMNavigationController.swift */,
+				DBBECC0F1E9A6F9F006C2BD2 /* PopGestrueDelegateObject.swift */,
+				DB63BA9E1E967CBD00ED7C24 /* Namespace.swift */,
+				DBBECC0D1E9A6E8B006C2BD2 /* ViewControllerInjectBlockWrapper.swift */,
+				DBBECC111E9A6FE6006C2BD2 /* UIViewControllerExtension.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -102,7 +114,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0810;
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = MangoMade;
 				TargetAttributes = {
 					DB32C4981DD4668500B27E52 = {
@@ -149,8 +161,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				DB32C4B41DD46A8900B27E52 /* Screen.swift in Sources */,
+				DBBECC0E1E9A6E8B006C2BD2 /* ViewControllerInjectBlockWrapper.swift in Sources */,
 				DB32C49F1DD4668500B27E52 /* ViewController.swift in Sources */,
+				DBBECC101E9A6F9F006C2BD2 /* PopGestrueDelegateObject.swift in Sources */,
+				DBBECC121E9A6FE6006C2BD2 /* UIViewControllerExtension.swift in Sources */,
 				DB32C4B11DD466DA00B27E52 /* MMNavigationController.swift in Sources */,
+				DB63BA9F1E967CBD00ED7C24 /* Namespace.swift in Sources */,
 				DB32C49D1DD4668500B27E52 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -187,6 +203,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -238,6 +255,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;

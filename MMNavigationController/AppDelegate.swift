@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        UIViewController.mm_load()
+        UIViewController.mm.load()
         window = UIWindow(frame: UIScreen.main.bounds)
         let rootViewController = MMNavigationController(rootViewController: NormalViewController())
         rootViewController.hideBottomLine()

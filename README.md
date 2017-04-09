@@ -4,21 +4,21 @@
 
 修改某一个`viewController`的颜色也不难：
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.navigationBar.barTintColor = UIColor.blueColor()
+        navigationController?.navigationBar.barTintColor = UIColor.blue
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        navigationController?.navigationBar.barTintColor = UIColor.whiteColor()
+        navigationController?.navigationBar.barTintColor = UIColor.white
     }
     
 只是每次需要这么多代码来解决一个看似很简单的问题，非常麻烦
 
 **使用MMNavigationController后只需要一句代码，即可修改导航栏颜色：**
 
-	mm_navigationBarBackgroundColor = UIColor.blueColor()
+	mm.navigationBarBackgroundColor = UIColor.blue
 		
 
 **并且支持全屏Pop手势**
@@ -30,23 +30,22 @@
 
 ## 使用
 
-**由于`Swift`不能重写`load`方法，所以需要在AppDelegate中调用`UIViewController.mm_load()`  
+**由于`Swift`不能重写`load`方法，所以需要在AppDelegate中调用`UIViewController.mm.load()`  
 然后用`MMNavigationController`代替`UINavigationController`**
 
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
     
-    	/** 高亮 **/
-        UIViewController.mm_load()
+        /** 高亮 **/
+        UIViewController.mm.load()
         let rootViewController = MMNavigationController(rootViewController: NormalViewController())
         /** 高亮 **/
         
         rootViewController.hideBottomLine()
-        window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = rootViewController
         window?.makeKeyAndVisible()
         return true
     }
-
 
 
 
@@ -56,22 +55,22 @@
         super.viewDidLoad()
 
 		 /// 修改当前ViewContoller的导航栏的背景颜色
-        mm_navigationBarBackgroundColor = UIColor.randomColor()
+        mm.navigationBarBackgroundColor = UIColor.random
         
         /// 修改当前ViewContoller标题颜色
-        mm_navigationBarTitleColor = UIColor.whiteColor()
+        mm.navigationBarTitleColor = UIColor.white
         
         /// 隐藏当前ViewContoller的导航栏
-		 mm_navigationBarHidden = true
+        mm.navigationBarHidden = true
 		 
 		 
 		 /** 全屏手势相关属性 **/
 		 
 		 /// pop 手势是否可用
-		 mm_popGestrueEnable = false
+        mm.popGestrueEnable = false
 		 
 		 /// pop 手势响应的范围
-		 mm_popGestrueEnableWidth = 150
+        mm.popGestrueEnableWidth = 150
 		
     }
     
@@ -92,4 +91,4 @@
 
 ## Cocoapods
 
-	pod 'MMNavigationController', '~> 0.0.3’
+	pod 'MMNavigationController', '~> 0.0.4’

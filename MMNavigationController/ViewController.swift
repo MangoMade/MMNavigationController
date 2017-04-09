@@ -23,12 +23,13 @@ class BaseViewController: UIViewController {
         nextButton.sizeToFit()
         nextButton.center = Screen.center
         nextButton.addTarget(self, action: #selector(reponseToNext(_:)), for: .touchUpInside)
+    
     }
     
     func reponseToNext(_ sender: UIButton) {
         
     }
-    
+
 }
 
 class NormalViewController: BaseViewController {
@@ -52,16 +53,16 @@ class RandomColorViewController: BaseViewController {
         
         title = "Random Color"
         
-        mm_navigationBarBackgroundColor = UIColor.randomColor()
-        mm_popGestrueEnableWidth  = 150
-        mm_navigationBarTitleColor = UIColor.white
+        mm.navigationBarBackgroundColor = UIColor.random
+        mm.popGestrueEnableWidth  = 150
+        mm.navigationBarTitleColor = UIColor.white
         
         let gestureEnableLabel = UILabel()
         gestureEnableLabel.numberOfLines = 0
         gestureEnableLabel.textAlignment = .center
         gestureEnableLabel.text = "pop手势\n\n灰色区域内\n\n有效"
         gestureEnableLabel.backgroundColor = UIColor.lightGray.withAlphaComponent(0.5)
-        gestureEnableLabel.frame = CGRect(x: 0, y: 0, width: mm_popGestrueEnableWidth, height: view.bounds.height)
+        gestureEnableLabel.frame = CGRect(x: 0, y: 0, width: mm.popGestrueEnableWidth, height: view.bounds.height)
         view.addSubview(gestureEnableLabel)
     }
     
@@ -75,7 +76,7 @@ class HiddenBarViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        mm_navigationBarHidden = true
+        mm.navigationBarHidden = true
     }
     
     override func reponseToNext(_ sender: UIButton) {
@@ -84,11 +85,9 @@ class HiddenBarViewController: BaseViewController {
     
 }
 
-
-
 extension UIColor {
 
-    class func randomColor() -> UIColor {
+    static var random: UIColor {
         let randR = CGFloat(arc4random_uniform(255)) / 255.0
         let randG = CGFloat(arc4random_uniform(255)) / 255.0
         let randB = CGFloat(arc4random_uniform(255)) / 255.0

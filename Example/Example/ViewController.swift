@@ -23,17 +23,17 @@ class BaseViewController: UIViewController {
         nextButton.sizeToFit()
         nextButton.center = Screen.center
         nextButton.addTarget(self, action: #selector(reponseToNext(_:)), for: .touchUpInside)
-    
+        
     }
     
     func reponseToNext(_ sender: UIButton) {
         
     }
-
+    
 }
 
 class NormalViewController: BaseViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Normal"
@@ -42,7 +42,7 @@ class NormalViewController: BaseViewController {
     override func reponseToNext(_ sender: UIButton) {
         navigationController?.pushViewController(RandomColorViewController(), animated: true)
     }
-
+    
 }
 
 class RandomColorViewController: BaseViewController {
@@ -86,7 +86,7 @@ class HiddenBarViewController: BaseViewController {
 }
 
 extension UIColor {
-
+    
     static var random: UIColor {
         let randR = CGFloat(arc4random_uniform(255)) / 255.0
         let randG = CGFloat(arc4random_uniform(255)) / 255.0

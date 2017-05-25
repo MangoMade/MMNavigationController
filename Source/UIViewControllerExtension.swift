@@ -17,12 +17,13 @@ private extension TypeWrapper {
 }
 
 fileprivate struct AssociatedKey {
-    static var viewWillAppearInjectBlock = 0
-    static var navigationBarHidden = 0
-    static var popGestrueEnable = 0
+    static var viewWillAppearInjectBlock    = 0
+    static var navigationBarHidden          = 0
+    static var popGestrueEnable             = 0
     static var navigationBarBackgroundColor = 0
-    static var popGestrueEnableWidth = 0
-    static var navigationBarTitleColor = 0
+    static var popGestrueEnableWidth        = 0
+    static var navigationBarTitleColor      = 0
+    static var gestureDelegate              = 0
 }
 
 public extension TypeWrapper where T: UIViewController {
@@ -112,6 +113,17 @@ public extension TypeWrapper where T: UIViewController {
         }
         set {
             objc_setAssociatedObject(self.viewController, &AssociatedKey.navigationBarTitleColor, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+    }
+    
+    /// gesture delegate
+    /// 可以通过设置这个代理，实现代理方法，解决手势冲突等问题
+    public var gestureDelegate: UIGestureRecognizerDelegate? {
+        get {
+            return objc_getAssociatedObject(self.viewController, &AssociatedKey.gestureDelegate) as? UIGestureRecognizerDelegate
+        }
+        set {
+            objc_setAssociatedObject(self.viewController, &AssociatedKey.gestureDelegate, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
     

@@ -65,6 +65,9 @@ open class MMNavigationController: UINavigationController {
                 
                 let titleColor = viewController.mm.navigationBarTitleColor ?? navigationController.defaultTitleColor
                 navigationController.setTitleColor(titleColor)
+                
+                // 设置手势delegate 的delegate,有点绕,主要解决手势冲突问题
+                navigationController.popGestrueDelegate.delegate = viewController.mm.gestureDelegate
             }
             let navigationBarBackgroundColor = viewController.mm.navigationBarBackgroundColor ?? self.defaultNavigationBarBackgroundColor
             (viewController.navigationController as? MMNavigationController)?.setBarBackgroundColor(navigationBarBackgroundColor, animated: true)

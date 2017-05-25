@@ -9,10 +9,11 @@
 import UIKit
 
 // MARK: - NavigationControllerPopGestrueDelegate
-class PopGestrueDelegateObject: NSObject {
+internal class PopGestrueDelegateObject: NSObject {
     
     weak var navigationController: UINavigationController?
     
+    weak var delegate: UIGestureRecognizerDelegate?
 }
 
 // MARK: - UIGestureRecognizerDelegate
@@ -51,7 +52,27 @@ extension PopGestrueDelegateObject: UIGestureRecognizerDelegate {
             return false
         }
         
-        return true
+        return delegate?.gestureRecognizerShouldBegin?(gestureRecognizer) ?? true
     }
     
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return delegate?.gestureRecognizer?(gestureRecognizer, shouldBeRequiredToFailBy:otherGestureRecognizer) ?? false
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return delegate?.gestureRecognizer?(gestureRecognizer, shouldRequireFailureOf: otherGestureRecognizer) ?? false
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return delegate?.gestureRecognizer?(gestureRecognizer ,shouldRecognizeSimultaneouslyWith: otherGestureRecognizer) ?? false
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        return delegate?.gestureRecognizer?(gestureRecognizer ,shouldReceive: touch) ?? true
+    }
+    
+    @available(iOS 9.0, *)
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive press: UIPress) -> Bool {
+        return delegate?.gestureRecognizer?(gestureRecognizer ,shouldReceive: press) ?? true
+    }
 }

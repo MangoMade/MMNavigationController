@@ -118,13 +118,22 @@ public extension TypeWrapper where T: UIViewController {
     
     /// gesture delegate
     /// 可以通过设置这个代理，实现代理方法，解决手势冲突等问题
-    public var gestureDelegate: UIGestureRecognizerDelegate? {
+    public weak var gestureDelegate: UIGestureRecognizerDelegate? {
         get {
-            return objc_getAssociatedObject(self.viewController, &AssociatedKey.gestureDelegate) as? UIGestureRecognizerDelegate
+            return gestureDelegateWrapper.instance
         }
         set {
-            objc_setAssociatedObject(self.viewController, &AssociatedKey.gestureDelegate, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            gestureDelegateWrapper.instance = newValue
         }
+    }
+    
+    private var gestureDelegateWrapper: WeakReferenceWrapper<UIGestureRecognizerDelegate> {
+        var wrapper = objc_getAssociatedObject(self.viewController, &AssociatedKey.gestureDelegate) as? WeakReferenceWrapper<UIGestureRecognizerDelegate>
+        if wrapper == nil {
+            wrapper = WeakReferenceWrapper<UIGestureRecognizerDelegate>()
+            objc_setAssociatedObject(self.viewController, &AssociatedKey.gestureDelegate, wrapper, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+        return wrapper!
     }
     
     internal var viewWillAppearInjectBlock: ViewControllerInjectBlockWrapper? {

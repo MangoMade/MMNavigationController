@@ -13,6 +13,7 @@
 		525D0C611EA8B22100FF5844 /* PopGestrueDelegateObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525D0C5C1EA8B22100FF5844 /* PopGestrueDelegateObject.swift */; };
 		525D0C621EA8B22100FF5844 /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525D0C5D1EA8B22100FF5844 /* UIViewControllerExtension.swift */; };
 		525D0C631EA8B22100FF5844 /* ViewControllerInjectBlockWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525D0C5E1EA8B22100FF5844 /* ViewControllerInjectBlockWrapper.swift */; };
+		52CF142E1ED6CCFE0072A107 /* WeakReferenceWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CF142D1ED6CCFE0072A107 /* WeakReferenceWrapper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		525D0C5C1EA8B22100FF5844 /* PopGestrueDelegateObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopGestrueDelegateObject.swift; sourceTree = "<group>"; };
 		525D0C5D1EA8B22100FF5844 /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		525D0C5E1EA8B22100FF5844 /* ViewControllerInjectBlockWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerInjectBlockWrapper.swift; sourceTree = "<group>"; };
+		52CF142D1ED6CCFE0072A107 /* WeakReferenceWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeakReferenceWrapper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 				525D0C5C1EA8B22100FF5844 /* PopGestrueDelegateObject.swift */,
 				525D0C5D1EA8B22100FF5844 /* UIViewControllerExtension.swift */,
 				525D0C5E1EA8B22100FF5844 /* ViewControllerInjectBlockWrapper.swift */,
+				52CF142D1ED6CCFE0072A107 /* WeakReferenceWrapper.swift */,
 				525D0C2F1EA8B06500FF5844 /* Info.plist */,
 			);
 			path = Source;
@@ -151,6 +154,7 @@
 				525D0C621EA8B22100FF5844 /* UIViewControllerExtension.swift in Sources */,
 				525D0C5F1EA8B22100FF5844 /* MMNavigationController.swift in Sources */,
 				525D0C611EA8B22100FF5844 /* PopGestrueDelegateObject.swift in Sources */,
+				52CF142E1ED6CCFE0072A107 /* WeakReferenceWrapper.swift in Sources */,
 				525D0C631EA8B22100FF5844 /* ViewControllerInjectBlockWrapper.swift in Sources */,
 				525D0C601EA8B22100FF5844 /* Namespace.swift in Sources */,
 			);

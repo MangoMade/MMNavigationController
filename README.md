@@ -96,4 +96,4 @@ override func viewDidLoad() {
 
 ## Cocoapods
 
-	pod 'MMNavigationController', '~> 0.0.4’
+	pod 'MMNavigationController', '~> 0.0.5’

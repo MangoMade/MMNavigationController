@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
 
 
   s.name         = "MMNavigationController"
-  s.version      = "0.0.5"
+  s.version      = "0.1.0"
   s.summary      = "A NavigationController with fullscreen pop gesture. You can change color of navigation bar in a simple way!"
 
   s.description  = <<-DESC

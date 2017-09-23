@@ -98,9 +98,9 @@ open class MMNavigationController: UINavigationController {
     /// 设置 title 的字体颜色
     public func setTitleColor(_ textColor: UIColor){
         if navigationBar.titleTextAttributes == nil{
-            navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : textColor]
+            navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor : textColor]
         }else{
-            navigationBar.titleTextAttributes![NSForegroundColorAttributeName] = textColor
+            navigationBar.titleTextAttributes![NSAttributedStringKey.foregroundColor] = textColor
         }
     }
     

@@ -149,8 +149,10 @@ public extension TypeWrapper where T: UIViewController {
 extension UIViewController {
     
     fileprivate static let methodsSwizzling: () = {
-        let originalViewWillAppearSelector = class_getInstanceMethod(UIViewController.self, #selector(viewWillAppear(_:)))
-        let swizzledViewWillAppearSelector = class_getInstanceMethod(UIViewController.self, #selector(mm_viewWillAppear(_:)))
+        guard let originalViewWillAppearSelector = class_getInstanceMethod(UIViewController.self, #selector(viewWillAppear(_:))),
+            let swizzledViewWillAppearSelector = class_getInstanceMethod(UIViewController.self, #selector(mm_viewWillAppear(_:))) else {
+                return
+        }
         method_exchangeImplementations(originalViewWillAppearSelector, swizzledViewWillAppearSelector)
     }()
     
